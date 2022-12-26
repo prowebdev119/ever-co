@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('auth')
