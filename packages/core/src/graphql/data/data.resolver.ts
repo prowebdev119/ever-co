@@ -45,6 +45,7 @@ export class DataResolver {
 			service.Model.updateMany({}, { isDeleted: true }, (err, raw) => {
 				if (err !== null) {
 					const collectionName = service.constructor.name.replace(
+						''
 					);
 					throw new Error(
 						`Cannot update '${collectionName}' collection`
