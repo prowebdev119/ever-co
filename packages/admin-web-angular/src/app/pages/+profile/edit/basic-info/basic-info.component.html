@@ -1,0 +1,174 @@
+<nb-card [nbSpinner]="loading">
+	<div class="container">
+		<form [formGroup]="basicInfoForm">
+			<div class="row">
+				<div class="form-group col-md-6">
+					<label for="id-username">
+						{{ 'PROFILE_VIEW.USERNAME' | translate }}</label
+					>
+					<input
+						id="id-username"
+						type="text"
+						class="form-control"
+						[ngClass]="
+							username.dirty || username.touched
+								? username.errors
+									? 'form-control-danger'
+									: 'form-control-success'
+								: ''
+						"
+						formControlName="username"
+						placeholder="{{ 'PROFILE_VIEW.USERNAME' | translate }}"
+					/>
+					<span *ngIf="usernameErrorMsg">
+						<strong class="text-danger"
+							>{{ 'PROFILE_VIEW.USERNAME' | translate }}:
+							{{ usernameErrorMsg }}</strong
+						></span
+					>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="id-email">
+						{{ 'PROFILE_VIEW.EMAIL' | translate }}</label
+					>
+					<input
+						id="id-email"
+						type="email"
+						class="form-control"
+						[ngClass]="
+							email.dirty || email.touched
+								? email.errors
+									? 'form-control-danger'
+									: 'form-control-success'
+								: ''
+						"
+						formControlName="email"
+						placeholder="{{ 'PROFILE_VIEW.EMAIL' | translate }}"
+					/>
+					<span *ngIf="emailErrorMsg">
+						<strong class="text-danger">
+							{{ 'PROFILE_VIEW.ERROR' | translate }}:
+							{{ emailErrorMsg }}</strong
+						></span
+					>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-md-6">
+					<label for="id-first-name">
+						{{ 'PROFILE_VIEW.FIRST_NAME_OPTIONAL' | translate }}
+					</label>
+					<input
+						id="id-first-name"
+						type="text"
+						class="form-control"
+						[ngClass]="
+							firstName.dirty || firstName.touched
+								? firstName.errors
+									? 'form-control-danger'
+									: 'form-control-success'
+								: ''
+						"
+						formControlName="firstName"
+						placeholder="{{
+							'PROFILE_VIEW.FIRST_NAME_OPTIONAL' | translate
+						}}"
+					/>
+					<span *ngIf="firstNameErrorMsg">
+						<strong class="text-danger">
+							{{ 'PROFILE_VIEW.ERROR' | translate }}:
+							{{ firstNameErrorMsg }}</strong
+						></span
+					>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="id-last-name">
+						{{ 'PROFILE_VIEW.LAST_NAME' | translate }}</label
+					>
+					<input
+						id="id-last-name"
+						type="text"
+						class="form-control"
+						[ngClass]="
+							lastName.dirty || lastName.touched
+								? lastName.errors
+									? 'form-control-danger'
+									: 'form-control-success'
+								: ''
+						"
+						formControlName="lastName"
+						placeholder="{{ 'PROFILE_VIEW.LAST_NAME' | translate }}"
+					/>
+					<span *ngIf="lastNameErrorMsg">
+						<strong class="text-danger">
+							{{ 'PROFILE_VIEW.ERROR' | translate }}:
+							{{ lastNameErrorMsg }}</strong
+						></span
+					>
+				</div>
+			</div>
+			<label for="id-picture">
+				{{ 'PROFILE_VIEW.PICTURE_URL' | translate }}</label
+			>
+			<div class="row form-group upload-img">
+				<div class="col-12">
+					<e-cu-file-uploader
+						[placeholder]="uploaderPlaceholder"
+						[name]="username?.value"
+						[fileUrl]="picture?.value"
+						[customClass]="
+							picture.invalid
+								? picture.errors
+									? 'form-control-danger'
+									: 'form-control-success'
+								: ''
+						"
+						(uploadedImgUrl)="picture.setValue($event)"
+					></e-cu-file-uploader>
+				</div>
+				<div class="col-12">
+					<span *ngIf="picture.invalid">
+						<strong class="text-danger">
+							{{ 'PROFILE_VIEW.ERROR' | translate }} :
+							{{ pictureUrlErrorMsg }}</strong
+						></span
+					>
+				</div>
+			</div>
+			<div
+				class="form-group"
+				[hidden]="picture.invalid || picture.value === ''"
+			>
+				<div class="row preview-img">
+					<img
+						src="{{ picture.value }}"
+						alt="Invalid image"
+						class="img-rounded"
+					/>
+					<div class="remove-icon" (click)="deleteImg()">
+						<span
+							class="ion-md-remove-circle text-danger pl-2 pr-2"
+							title="{{ 'PROFILE_VIEW.REMOVE' | translate }}"
+						></span>
+					</div>
+				</div>
+			</div>
+
+			<button
+				nbButton
+				status="success"
+				outline
+				size="large"
+				class="float-right save-button-profile"
+				[disabled]="!basicInfoForm.valid || !basicInfoForm.dirty"
+				(click)="saveChanges()"
+			>
+				<i class="ion-md-checkmark mr-1"></i>
+				<span> {{ 'PROFILE_VIEW.SAVE' | translate }} </span>
+			</button>
+		</form>
+	</div>
+</nb-card>

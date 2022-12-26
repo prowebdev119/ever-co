@@ -1,0 +1,87 @@
+<nb-card id="dashboard-select-stores" size="medium" class="h-auto">
+	<nb-card-header>
+		<h6>{{ 'DASHBOARD_VIEW.SELECT_COMPONENT.STORES' | translate }}</h6>
+	</nb-card-header>
+
+	<nb-card-body>
+		<ng-select
+			(change)="selectNewStore($event)"
+			[items]="stores"
+			placeholder="{{
+				'DASHBOARD_VIEW.SELECT_COMPONENT.SELECT_STORE' | translate
+			}}"
+			bindLabel="name"
+			bindValue="name"
+		>
+			<ng-template ng-label-tmp let-item="item">
+				<img
+					*ngIf="item.logo"
+					height="15"
+					width="15"
+					class="mr-2"
+					[src]="item.logo"
+				/>
+				<b>{{ item.name }}</b>
+			</ng-template>
+			<ng-template ng-option-tmp let-item="item" let-index="index">
+				<p class="card-title">
+					<img
+						*ngIf="item.logo"
+						height="40"
+						width="40"
+						class="mr-1"
+						[src]="item.logo"
+					/>
+
+					{{ item.name }}
+				</p>
+			</ng-template>
+		</ng-select>
+
+		<div *ngIf="selectedStore">
+			<div class="mt-4">
+				<h6>
+					{{
+						'DASHBOARD_VIEW.SELECT_COMPONENT.CONTACT_DETAILS'
+							| translate
+					}}
+				</h6>
+				<ul>
+					<li>
+						{{
+							'DASHBOARD_VIEW.SELECT_COMPONENT.PHONE' | translate
+						}}: <strong>{{ selectedStore.contactPhone }}</strong>
+					</li>
+					<li>
+						{{
+							'DASHBOARD_VIEW.SELECT_COMPONENT.EMAIL' | translate
+						}}: <strong>{{ selectedStore.contactEmail }}</strong>
+					</li>
+					<li>
+						{{
+							'DASHBOARD_VIEW.SELECT_COMPONENT.ORDERS_FORWARDING_WITH'
+								| translate
+						}}
+
+						<strong>
+							{{
+								'DASHBOARD_VIEW.SELECT_COMPONENT.PHONE'
+									| translate
+							}}
+						</strong>
+						<strong>
+							{{
+								'DASHBOARD_VIEW.SELECT_COMPONENT.EMAIL'
+									| translate
+							}}
+						</strong>
+					</li>
+				</ul>
+			</div>
+
+			<div class="mt-4">
+				<img src="{{ selectedStore.logo }}" class="mb-2" width="40%" />
+			</div>
+		</div>
+	</nb-card-body>
+</nb-card>

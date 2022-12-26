@@ -1,0 +1,54 @@
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"composite": false,
+		"declaration": false,
+		"declarationMap": false,
+		"downlevelIteration": true,
+		"forceConsistentCasingInFileNames": true,
+		"sourceMap": true,
+		"importHelpers": true,
+		"target": "es2016",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"baseUrl": "./",
+		"rootDir": "./",
+		"noLib": false,
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"strictNullChecks": false,
+		"removeComments": true,
+		"lib": ["dom", "es2018", "esnext.array", "esnext.asynciterable"],
+		"plugins": [
+			{
+				"name": "tslint-language-service"
+			}
+		],
+		"preserveConstEnums": true,
+		"allowSyntheticDefaultImports": true,
+		"noUnusedLocals": false,
+		"noImplicitAny": false,
+		"esModuleInterop": false,
+		"resolveJsonModule": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"typeRoots": ["node_modules/@types"]
+	},
+	"files": ["node_modules/@types/node/index.d.ts"],
+	"exclude": [
+		"coverage/**/*",
+		"tmp",
+		"node_modules",
+		"dist/**/*",
+		"build",
+		"lib",
+		"test",
+		"__tests__",
+		"**/*.test*",
+		"**/*.spec*",
+		"packages/*/node_modules",
+		"packages/*/lib",
+		"packages/*/dist",
+		"packages/*/build"
+	]
+}

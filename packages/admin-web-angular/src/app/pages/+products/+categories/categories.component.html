@@ -1,0 +1,35 @@
+<nb-card>
+	<toaster-container></toaster-container>
+
+	<nb-card-header>
+		<button
+			nbButton
+			status="success"
+			class="mr-2 d-inline-block"
+			type="button"
+			tabindex="0"
+			(click)="openWizardNewCategory()"
+		>
+			<i class="ion-md-add button-icon mr-1"></i>
+			<small>{{ 'CATEGORY_VIEW.CREATE_BUTTON' | translate }}</small>
+		</button>
+		<button
+			nbButton
+			status="danger"
+			class="mr-2 d-inline-block"
+			type="button"
+			tabindex="0"
+			[disabled]="!hasSelectedCategories"
+			(click)="deleteSelectedRows()"
+		>
+			<i class="ion-md-trash button-icon mr-1"></i>
+			<span>{{
+				'CATEGORY_VIEW.DELETE' | translate
+			}}</span>
+		</button>
+	</nb-card-header>
+
+	<nb-card-body [nbSpinner]="loading || categoriesTable.loading">
+		<ea-categories-table #categoriesTable></ea-categories-table>
+	</nb-card-body>
+</nb-card>

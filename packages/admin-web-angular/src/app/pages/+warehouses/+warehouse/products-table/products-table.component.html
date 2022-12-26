@@ -1,0 +1,35 @@
+<nb-card [nbSpinner]="loading">
+	<nb-card-header>
+		<button
+			nbButton
+			status="success"
+			class="d-inline-block mr-2"
+			(click)="addProducts.emit()"
+		>
+			<i class="ion-md-add active button-icon mr-1"></i>
+			{{ 'WAREHOUSE_VIEW.PRODUCTS_TAB.ADD_PRODUCTS' | translate }}
+		</button>
+		<button
+			nbButton
+			status="danger"
+			class="d-inline-block"
+			[disabled]="!productsTable.hasSelectedProducts"
+			(click)="deleteSelectedRows()"
+		>
+			<i class="ion-md-trash button-icon mr-1"></i>
+			{{ 'WAREHOUSE_VIEW.PRODUCTS_TAB.DELETE' | translate }}
+		</button>
+		<small class="pull-right">{{
+			'WAREHOUSE_VIEW.PRODUCTS_TAB.CLICK_ON_PRODUCT_IMAGE_TO_INCREASE_AVAILABLE_QUANTITY'
+				| translate
+		}}</small>
+	</nb-card-header>
+
+	<nb-card-body>
+		<ea-warehouse-products-table
+			#productsTable
+			(onEdit)="editProduct($event)"
+			(onDelete)="removeProduct($event)"
+		></ea-warehouse-products-table>
+	</nb-card-body>
+</nb-card>

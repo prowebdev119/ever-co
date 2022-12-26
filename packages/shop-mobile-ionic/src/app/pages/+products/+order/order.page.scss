@@ -1,0 +1,47 @@
+.timePassed {
+	color: #f0f0f0;
+	margin: 0 auto;
+	text-align: center;
+	font-style: italic;
+	font-size: 1.1em;
+	padding-top: 15px;
+	span {
+		display: block;
+	}
+}
+
+.box {
+	position: relative;
+
+	&-top {
+		padding: 30px 20px;
+		padding-bottom: 10px;
+	}
+
+	&-close {
+		top: 10px;
+		right: 10px;
+		position: absolute;
+		display: flex;
+		font-size: 20px;
+	}
+}
+
+.order-page {
+	z-index: 9999;
+
+	button {
+		padding: 15px;
+		border-radius: 5px;
+		display: flex !important;
+		align-content: center !important;
+		align-items: center !important;
+		position: relative;
+		text-align: center;
+		height: 100%;
+
+		span {
+			margin: 0 auto;
+		}
+	}
+}

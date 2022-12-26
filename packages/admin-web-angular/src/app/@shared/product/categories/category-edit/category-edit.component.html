@@ -1,0 +1,29 @@
+<div class="modal-header">
+	<span class="modal-title">
+		{{ 'CATEGORY_VIEW.EDIT.EDIT_CATEGORY' | translate }}
+		{{ basicInfo?.name.value }}
+	</span>
+	<button class="close" aria-label="Close" (click)="cancel()">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="modal-body">
+	<ea-product-category-basic-info-form
+		[category]="currentCategory"
+		#basicInfo
+	></ea-product-category-basic-info-form>
+</div>
+
+<div class="modal-footer">
+	<button
+		nbButton
+		status="success"
+		size="large"
+		type="button"
+		(click)="editCategory(basicInfo.getEditObject(currentCategory))"
+		[disabled]="basicInfo.form.invalid"
+	>
+		{{ 'CATEGORY_VIEW.EDIT.DONE' | translate }}!
+	</button>
+</div>

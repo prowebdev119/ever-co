@@ -1,0 +1,58 @@
+{
+	"name": "@ever-platform/common-angular",
+	"description": "Ever Platform Shared Angular Core",
+	"license": "AGPL-3.0",
+	"version": "0.4.3",
+	"homepage": "https://ever.co",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ever-co/ever-demand.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ever-co/ever-demand/issues"
+	},
+	"private": false,
+	"author": {
+		"name": "Ever Co. LTD",
+		"email": "ever@ever.co",
+		"url": "https://ever.co"
+	},
+	"scripts": {
+		"watch": "tsc -p ./tsconfig.build.json -w",
+		"build": "rimraf build && tsc -p ./tsconfig.build.json",
+		"lint": "tslint --fix --project ./",
+		"test": "jest --config ./jest.config.js"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {
+		"@angular/animations": "^13.1.0",
+		"@angular/cdk": "^13.1.0",
+		"@angular/common": "^13.1.0",
+		"@angular/compiler": "^13.1.0",
+		"@angular/core": "^13.1.0",
+		"@angular/forms": "^13.1.0",
+		"@angular/language-service": "^13.1.0",
+		"@angular/localize": "^13.1.0",
+		"@angular/platform-browser": "^13.1.0",
+		"@angular/platform-browser-dynamic": "^13.1.0",
+		"@angular/router": "^13.1.0",
+		"@angular/service-worker": "^13.1.0",
+		"@ever-platform/common": "^0.4.3",
+		"@ngx-translate/core": "^13.0.0",
+		"@ngx-translate/http-loader": "^6.0.0",
+		"tslib": "^2.3.1",
+		"underscore": "^1.13.1",
+		"underscore.string": "^3.3.5",
+		"zone.js": "~0.11.4"
+	},
+	"devDependencies": {
+		"@types/node": "16.11.0",
+		"lint": "^0.7.0",
+		"rimraf": "^3.0.2",
+		"ts-node": "~10.3.0",
+		"typescript": "~4.5.3"
+	},
+	"snyk": false
+}

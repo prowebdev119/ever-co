@@ -1,0 +1,21 @@
+@import '../../../order-info-page';
+
+.takeaway-title {
+	display: flex !important;
+	align-content: center !important;
+	align-items: center !important;
+	text-align: center;
+	flex-direction: column;
+	position: relative;
+	.title-content {
+		margin: auto;
+	}
+
+	.box-close {
+		top: 10px;
+		right: 10px;
+		position: absolute;
+		display: flex;
+		font-size: 20px;
+	}
+}

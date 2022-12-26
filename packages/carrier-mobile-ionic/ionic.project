@@ -1,0 +1,8 @@
+{
+  "name": "ever-carrier",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "app_id": "16ee2ab7" 
+}

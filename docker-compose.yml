@@ -1,0 +1,148 @@
+version: '3.7'
+
+services:
+    db:
+        image: mongo
+        container_name: db
+        restart: always
+        environment:
+            - MONGO_DATA_DIR=/data/db
+            - MONGO_LOG_DIR=/dev/null
+        volumes:
+            - mongo_data:/data/db
+        ports:
+            - '27017:27017'
+        command: mongod --logpath=/dev/null # --quiet
+        networks:
+            - overlay
+
+    admin-web:
+        container_name: admin-web
+        image: ever-admin-web:latest
+        command: yarn run:admin
+        build:
+            context: .
+            dockerfile: .deploy/admin-web-angular/Dockerfile
+        environment:
+            NODE_ENV: production
+        restart: on-failure
+        depends_on:
+            - api
+        ports:
+            - 4200:4200
+        networks:
+            - overlay
+
+    shop-web:
+        container_name: shop-web
+        image: ever-shop-web:latest
+        command: yarn run:shopweb
+        build:
+            context: .
+            dockerfile: .deploy/shop-web-angular/Dockerfile
+        environment:
+            NODE_ENV: production
+        restart: on-failure
+        depends_on:
+            - api
+        ports:
+            - 3000:3000
+        networks:
+            - overlay
+
+    carrier-mobile:
+        container_name: carrier-mobile
+        image: ever-carrier-mobile:latest
+        command: yarn run:carrier
+        build:
+            context: .
+            dockerfile: .deploy/carrier-mobile-ionic/Dockerfile
+        environment:
+            NODE_ENV: production
+        restart: on-failure
+        depends_on:
+            - api
+        ports:
+            - 4203:4200
+            - 4204:4203
+        networks:
+            - overlay
+
+    shop-mobile:
+        container_name: shop-mobile
+        image: ever-shop-mobile:latest
+        command: yarn run:shopmobile
+        build:
+            context: .
+            dockerfile: .deploy/shop-mobile-ionic/Dockerfile
+        environment:
+            NODE_ENV: production
+        restart: on-failure
+        depends_on:
+            - api
+        ports:
+            - 4201:4201
+        networks:
+            - overlay
+
+    merchant-mobile:
+        container_name: merchant-mobile
+        image: ever-merchant-mobile:latest
+        command: yarn run:merchant
+        build:
+            context: .
+            dockerfile: .deploy/merchant-tablet-ionic/Dockerfile
+        environment:
+            NODE_ENV: production
+        restart: on-failure
+        depends_on:
+            - api
+        ports:
+            - 4202:4202
+        networks:
+            - overlay
+
+    api:
+        container_name: api
+        image: ever-api:latest
+        build:
+            context: .
+            dockerfile: .deploy/api/Dockerfile
+            args:
+                NODE_ENV: ${NODE_ENV:-development}
+        environment:
+            NODE_ENV: ${NODE_ENV:-development}
+            WAIT_HOSTS: db:27017
+            DB_HOST: db
+            DB_URI: mongodb://db/ever_development
+            TESTING_DB_URI: mongodb://db/ever_testing
+        env_file:
+            - .env
+        entrypoint: './entrypoint.compose.sh'
+        command: ['node', 'packages/core/build/src/main.js']
+        restart: on-failure
+        depends_on:
+            - db
+        links:
+            - db
+        # volumes:
+        #    - .:/srv/ever
+        #    - root_node_modules:/srv/ever/node_modules
+        #    - core_node_modules:/srv/ever/packages/core/node_modules
+        ports:
+            - 5500:5500
+            - 2087:2087
+            - 2086:2086
+            - 8443:8443
+        networks:
+            - overlay
+
+volumes:
+    root_node_modules:
+    core_node_modules:
+    certificates:
+    mongo_data:
+
+networks:
+    overlay:
+        driver: bridge

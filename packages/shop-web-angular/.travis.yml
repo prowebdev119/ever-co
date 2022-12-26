@@ -1,0 +1,25 @@
+sudo: false
+dist: trusty
+language: node_js
+
+cache:
+    directories:
+        - node_modules
+
+addons:
+    chrome: stable
+
+node_js:
+    - '8'
+
+matrix:
+    fast_finish: true
+
+before_install:
+    - npm install yarn@latest -g
+
+install:
+    - yarn install
+
+script:
+    - yarn run ci:travis

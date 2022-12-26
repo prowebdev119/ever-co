@@ -1,0 +1,29 @@
+{
+	"lerna": "3.13.0",
+	"npmClient": "yarn",
+	"version": "0.3.0",
+	"concurrency": 8,
+	"changelog": {
+		"repo": "ever-co/ever",
+		"cacheDir": ".changelog",
+		"labels": {}
+	},
+	"packages": ["packages/*"],
+	"useWorkspaces": true,
+	"command": {
+		"bootstrap": {},
+		"publish": {
+			"conventionalCommits": true,
+			"ignoreChanges": ["*.md", "test/**"],
+			"message": "chore(release): %s"
+		},
+		"version": {
+			"push": false
+		},
+		"clean": {
+			"yes": true
+		}
+	},
+	"npmClientArgs": ["--no-package-lock"],
+	"stream": true
+}

@@ -1,0 +1,139 @@
+<toaster-container></toaster-container>
+
+<div class="row">
+	<div class="col-md-8">
+		<nb-card>
+			<nb-card-header>
+				<!-- back -->
+				<svg
+					viewBox="0 0 24 24"
+					class="control-icon control-icon-left"
+					[routerLink]="['/carriers']"
+				>
+					<path
+						d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
+					/>
+				</svg>
+
+				<div style="display: inline-block;">
+					<h1 style="margin-bottom: 10px;">
+						{{ 'Carrier' | translate }}
+					</h1>
+
+					<h4>{{ 'Manage carrier and deliveries' | translate }}</h4>
+				</div>
+			</nb-card-header>
+			<nb-card-body>
+				<button
+					type="button"
+					nbButton
+					status="primary"
+					class="btn-with-icon no-text-transform"
+					[routerLink]="['./edit']"
+				>
+					<i class="ion-md-create mr-1"></i>
+					<span>{{
+						'CARRIERS_VIEW.CARRIER_PAGE.EDIT' | translate
+					}}</span>
+				</button>
+			</nb-card-body>
+		</nb-card>
+
+		<ea-carrier-location></ea-carrier-location>
+
+		<nb-tabset (changeTab)="selectTab($event)" fullWidth>
+			<nb-tab
+				tabTitle="{{
+					'CARRIERS_VIEW.ACTIVE_AND_AVAILABLE_ORDERS' | translate
+				}}"
+			>
+				<ea-carrier-orders
+					#carrierOrders
+					*ngIf="selectedCarrier"
+					[carrierOrderOptions]="carrierOrderOptions"
+					[selectedCarrier]="selectedCarrier"
+					(selectedOrderEvent)="orderStatusShow($event)"
+				>
+				</ea-carrier-orders>
+			</nb-tab>
+			<nb-tab tabTitle="{{ 'CARRIERS_VIEW.ORDERS_HISTORY' | translate }}">
+				<ea-carrier-orders-history
+					*ngIf="selectedCarrier"
+					[carrierOrderOptions]="carrierOrderOptions"
+					[selectedCarrier]="selectedCarrier"
+					(selectedOrderEvent)="orderStatusShow($event)"
+				>
+				</ea-carrier-orders-history>
+			</nb-tab>
+		</nb-tabset>
+	</div>
+
+	<div class="col-md-4">
+		<nb-card id="carrier-select-carriers">
+			<nb-card-header class="header-color">
+				{{ 'Carrier' | translate }}
+			</nb-card-header>
+
+			<nb-card-body>
+				<ng-select
+					*ngIf="selectedCarrier"
+					(change)="carrierSelect($event)"
+					[items]="carriers"
+					[ngModel]="selectedCarrier.id"
+					[clearable]="false"
+					placeholder="{{
+						'CARRIERS_VIEW.CARRIER_PAGE.SELECT_CARRIER' | translate
+					}}"
+					bindLabel="id"
+					bindValue="id"
+				>
+					<ng-template ng-label-tmp let-item="item">
+						<img
+							*ngIf="item.logo"
+							height="15"
+							width="15"
+							class="mr-2"
+							[src]="item.logo"
+						/>
+						{{ item.firstName }}
+						{{ item.firstName && item.lastName }}
+						{{ item.firstName ? '' : '# ' + item.id }}
+					</ng-template>
+					<ng-template
+						ng-option-tmp
+						let-item="item"
+						let-index="index"
+					>
+						<p class="card-title">
+							<img
+								*ngIf="item.logo"
+								height="40"
+								width="40"
+								class="mr-1"
+								[src]="item.logo"
+							/>
+							{{ item.firstName }}
+							{{ item.firstName && item.lastName }}
+							{{ item.firstName ? '' : '# ' + item.id }}
+						</p>
+					</ng-template>
+				</ng-select>
+			</nb-card-body>
+		</nb-card>
+
+		<ea-carrier-info
+			*ngIf="selectedCarrier"
+			[carrier]="selectedCarrier"
+			(getChangeCarrier)="getChangeCarrier($event)"
+		></ea-carrier-info>
+
+		<ea-carrier-orders-status
+			*ngIf="showOrderStatus"
+			[selectedOrder]="selectedOrder"
+			[selectedCarrier]="selectedCarrier"
+			(getChangeOrder)="getChangeOrder($event)"
+		>
+			{{ 'CARRIERS_VIEW.CARRIER_PAGE.CARRIER_ORDERS_STATUS' | translate }}
+		</ea-carrier-orders-status>
+	</div>
+</div>
