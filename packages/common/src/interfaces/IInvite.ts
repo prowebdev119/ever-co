@@ -6,6 +6,7 @@ import IGeoLocation, {
 import { DBCreateObject, DBRawObject, PyroObjectId } from '../@pyro/db';
 
 export interface IInviteCreateObject extends DBCreateObject {
+	geoLocation: IGeoLocationCreateObject;
 }
 
 export interface IInviteUpdateObject {
