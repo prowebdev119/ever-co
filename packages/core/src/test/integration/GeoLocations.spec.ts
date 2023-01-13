@@ -1,4 +1,3 @@
-/*
 import { GeoLocationsService } from '../../services/geo-locations';
 
 describe('GeoLocationsService', () => {
@@ -8,4 +7,3 @@ describe('GeoLocationsService', () => {
 		});
 	});
 });
-*/
