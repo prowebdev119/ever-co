@@ -8,7 +8,7 @@ export interface IOrderProductCreateObject extends DBCreateObject {
 	product: IProduct;
 
 	/**
-	//  * Min delivery time (in minutes)
+	 * Min delivery time (in minutes)
 	 *
 	 * @type {number}
 	 * @memberof IOrderProductCreateObject
